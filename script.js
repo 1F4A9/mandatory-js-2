@@ -33,36 +33,44 @@ function getPlayerO(id) {
     getWinner()
 }
 
-function getWinner() { // lägg till en break till så loopen inte kör genom alla possibleWins
-    // kör endast genom om totalMoves length är > 3
-    for (let i = 0; i < possibleWins.length; i++) {
-        if (playBoard[possibleWins[i][0]] === 'X' && playBoard[possibleWins[i][1]] === 'X' && playBoard[possibleWins[i][2]] === 'X') {
+function getWinner() {
+    if (totalMoves.length >= 5) {
+        if (playBoard[possibleWins[0][0]] === 'X' && playBoard[possibleWins[0][1]] === 'X' && playBoard[possibleWins[0][2]] === 'X' ||
+            playBoard[possibleWins[1][0]] === 'X' && playBoard[possibleWins[1][1]] === 'X' && playBoard[possibleWins[1][2]] === 'X' ||
+            playBoard[possibleWins[2][0]] === 'X' && playBoard[possibleWins[2][1]] === 'X' && playBoard[possibleWins[2][2]] === 'X' ||
+            playBoard[possibleWins[3][0]] === 'X' && playBoard[possibleWins[3][1]] === 'X' && playBoard[possibleWins[3][2]] === 'X' ||
+            playBoard[possibleWins[4][0]] === 'X' && playBoard[possibleWins[4][1]] === 'X' && playBoard[possibleWins[4][2]] === 'X' ||
+            playBoard[possibleWins[5][0]] === 'X' && playBoard[possibleWins[5][1]] === 'X' && playBoard[possibleWins[5][2]] === 'X' ||
+            playBoard[possibleWins[6][0]] === 'X' && playBoard[possibleWins[6][1]] === 'X' && playBoard[possibleWins[6][2]] === 'X' ||
+            playBoard[possibleWins[7][0]] === 'X' && playBoard[possibleWins[7][1]] === 'X' && playBoard[possibleWins[7][2]] === 'X') {
             displayScoreCount('X');
             gamePlaying = false;
-            break;
-        } else if (playBoard[possibleWins[i][0]] === 'O' && playBoard[possibleWins[i][1]] === 'O' && playBoard[possibleWins[i][2]] === 'O') {
+        } else if (playBoard[possibleWins[0][0]] === 'X' && playBoard[possibleWins[0][1]] === 'X' && playBoard[possibleWins[0][2]] === 'X' ||
+            playBoard[possibleWins[1][0]] === 'O' && playBoard[possibleWins[1][1]] === 'O' && playBoard[possibleWins[1][2]] === 'O' ||
+            playBoard[possibleWins[2][0]] === 'O' && playBoard[possibleWins[2][1]] === 'O' && playBoard[possibleWins[2][2]] === 'O' ||
+            playBoard[possibleWins[3][0]] === 'O' && playBoard[possibleWins[3][1]] === 'O' && playBoard[possibleWins[3][2]] === 'O' ||
+            playBoard[possibleWins[4][0]] === 'O' && playBoard[possibleWins[4][1]] === 'O' && playBoard[possibleWins[4][2]] === 'O' ||
+            playBoard[possibleWins[5][0]] === 'O' && playBoard[possibleWins[5][1]] === 'O' && playBoard[possibleWins[5][2]] === 'O' ||
+            playBoard[possibleWins[6][0]] === 'O' && playBoard[possibleWins[6][1]] === 'O' && playBoard[possibleWins[6][2]] === 'O' ||
+            playBoard[possibleWins[7][0]] === 'O' && playBoard[possibleWins[7][1]] === 'O' && playBoard[possibleWins[7][2]] === 'O') {
             displayScoreCount('O');
             gamePlaying = false;
-            break;
         } else if (totalMoves.length === 9) {
-            displayScoreCount('Tie')
+            document.querySelector('.winner').textContent = `We have a tie!`;
             gamePlaying = false;
-            break;
         }
     }
 }
 
 function displayScoreCount(winner) {
-    console.log('beepboop: ' + winner)
-
-    // document.querySelector('.x-score').textContent = winner;
-    // document.querySelector('.o-score').textContent = winner;
-    // document.querySelector('.tie-score').textContent = winner;
+    document.querySelector('.winner').textContent = `Player ${winner} won the game!`;
 }
 
 document.querySelector('#reset').addEventListener('click', init)
 
 function init() {
+    document.querySelector('.winner').innerHTML = "";
+
     const squares = document.querySelectorAll('.square');
     squares.forEach((element) => element.addEventListener('click', playGame));
 
